@@ -1,5 +1,6 @@
 const express = require("express");
 const { MongoClient } = require("mongodb");
+const ObjectId = require("mongodb").ObjectId;
 const cors = require("cors");
 const { json } = require("express");
 require("dotenv").config();
@@ -21,6 +22,33 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     await client.connect();
+    const database = client.db("bkVacations");
+    const vacationCollection = database.collection("vacations");
+
+    // GET API Start
+    app.get("/vacations", async (req, res) => {
+      const cursor = vacationCollection.find({});
+      const vacations = await cursor.toArray();
+      res.send(vacations);
+    });
+    // GET API End
+
+    // GET Single Service
+    app.get("/vacations/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const support = await vacationCollection.findOne(query);
+      res.json(support);
+    });
+
+    // Post API Start
+    app.post("/vacations", async (req, res) => {
+      const support = req.body;
+      const result = await vacationCollection.insertOne(support);
+      console.log(result);
+      res.json(result);
+    });
+    // Post API End
   } finally {
     // await client.close();
   }
