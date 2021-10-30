@@ -112,6 +112,16 @@ async function run() {
       // console.log(result);
       res.json(result);
     });
+
+    // Delete API
+    app.delete("/packages/:id", async (req, res) => {
+      console.log(req.params.id);
+      const result = await userCollection.deleteOne({
+        _id: ObjectId(req.params.id),
+      });
+      // console.log(result);
+      res.json(result);
+    });
   } finally {
     // await client.close();
   }
