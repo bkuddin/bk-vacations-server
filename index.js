@@ -94,6 +94,13 @@ async function run() {
     // Here Everything for User Start--------------
     // Here Everything for User Start--------------
 
+    // GET API Start
+    app.get("/packages", async (req, res) => {
+      const cursor = userCollection.find({});
+      const vacations = await cursor.toArray();
+      res.send(vacations);
+    });
+
     // Post API
     app.post("/packages", async (req, res) => {
       const package = req.body;
