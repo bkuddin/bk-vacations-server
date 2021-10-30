@@ -124,7 +124,7 @@ async function run() {
     app.delete("/packages/:id", async (req, res) => {
       console.log(req.params.id);
       const result = await userCollection.deleteOne({
-        _id: ObjectId(req.params.id),
+        _id: req.params.id,
       });
       // console.log(result);
       res.json(result);
