@@ -114,7 +114,7 @@ async function run() {
     });
 
     // Delete API
-    app.delete("/packages/:id", async (req, res) => {
+    app.delete("/packages/:email/:id", async (req, res) => {
       console.log(req.params.id);
       const result = await userCollection.deleteOne({
         _id: ObjectId(req.params.id),
