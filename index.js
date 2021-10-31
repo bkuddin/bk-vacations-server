@@ -27,6 +27,7 @@ async function run() {
     const database = client.db("bkVacations");
     const vacationCollection = database.collection("vacations");
     const userCollection = database.collection("packages");
+    const addressCollection = database.collection("addresses");
 
     //---------Here everything for Admin------
     // GET API Start
@@ -99,6 +100,12 @@ async function run() {
       const cursor = userCollection.find({});
       const vacations = await cursor.toArray();
       res.send(vacations);
+    });
+    // GET API Start
+    app.get("/addresses", async (req, res) => {
+      const cursor = addressCollection.find({});
+      const addresses = await cursor.toArray();
+      res.send(addresses);
     });
 
     // Post API
