@@ -98,8 +98,8 @@ async function run() {
     // GET API Start
     app.get("/packages", async (req, res) => {
       const cursor = userCollection.find({});
-      const vacations = await cursor.toArray();
-      res.send(vacations);
+      const packages = await cursor.toArray();
+      res.send(packages);
     });
     // GET API Start
     app.get("/addresses", async (req, res) => {
