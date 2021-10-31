@@ -109,6 +109,13 @@ async function run() {
     });
 
     // Post API
+    app.post("/addresses", async (req, res) => {
+      const address = req.body;
+      const result = await addressCollection.insertOne(address);
+      console.log(result);
+      res.json(result);
+    });
+    // Post API
     app.post("/packages", async (req, res) => {
       const package = req.body;
       const result = await userCollection.insertOne(package);
