@@ -143,6 +143,32 @@ async function run() {
       // console.log(result);
       res.json(result);
     });
+
+    // Update API
+
+    app.put("/packages/:id", async (req, res) => {
+      const id = req.params.id;
+      const updatedInfo = req.body;
+
+      const result = await userCollection.updateOne(
+        { _id: id },
+        {
+          $set: {
+            location: updatedInfo.location,
+            title: updatedInfo.title,
+            details: updatedInfo.details,
+            price: updatedInfo.price,
+            imgTitle: updatedInfo.imgTitle,
+            img: updatedInfo.img,
+            status: updatedInfo.status,
+          },
+        }
+      );
+      console.log(result);
+      res.json(result);
+    });
+
+    // Update API End
   } finally {
     // await client.close();
   }
